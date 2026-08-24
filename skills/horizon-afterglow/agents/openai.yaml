@@ -1,0 +1,4 @@
+interface:
+  display_name: "Horizon Afterglow"
+  short_description: "Polish academic manuscripts without technical drift"
+  default_prompt: "Use $horizon-afterglow to polish this manuscript while preserving all claims, numbers, citations, math, and LaTeX."
