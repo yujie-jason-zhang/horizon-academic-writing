@@ -1,0 +1,4 @@
+interface:
+  display_name: "Horizon Ember"
+  short_description: "Polish one academic paragraph without technical drift"
+  default_prompt: "Use $horizon-ember to polish this academic paragraph while preserving all claims, numbers, citations, math, terminology, and LaTeX."
