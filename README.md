@@ -14,9 +14,9 @@ Horizon treats scholarly writing as technical communication rather than generic 
 |---|---|---|
 | **Horizon-Ember** | Available | Focused, paragraph-level academic polishing |
 | **Horizon-Afterglow** | Available | Balanced, reader-oriented manuscript polishing |
-| **Horizon-Aurora** | Planned | Exhaustive manuscript-level polishing and consistency review |
+| **Horizon-Aurora** | Testing | Exhaustive manuscript-level polishing and consistency review |
 
-Only released skills are included in `skills/`; planned skills do not have placeholder directories.
+Only released skills are included in `skills/`; testing and planned skills do not have placeholder directories.
 
 ## Horizon-Ember
 
