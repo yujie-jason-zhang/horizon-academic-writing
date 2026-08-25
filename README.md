@@ -1,5 +1,6 @@
 # Horizon Academic Writing
 
+[![中文](https://img.shields.io/badge/%E8%AF%AD%E8%A8%80-%E4%B8%AD%E6%96%87-red.svg)](README.zh-CN.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Agent Skills](https://img.shields.io/badge/Agent-Skills-4B5563.svg)](https://agentskills.io)
 [![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-blue.svg)](https://www.python.org/downloads/)
@@ -166,6 +167,7 @@ A lower-priority improvement must never damage a higher-priority one.
 ```text
 .
 ├── README.md
+├── README.zh-CN.md
 ├── LICENSE
 ├── CHANGELOG.md
 └── skills/
