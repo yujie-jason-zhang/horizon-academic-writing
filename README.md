@@ -15,6 +15,7 @@ Horizon treats scholarly writing as technical communication rather than generic 
 |---|---|---|
 | **Horizon-Ember** | Available | Focused, paragraph-level academic polishing |
 | **Horizon-Afterglow** | Available | Balanced, reader-oriented manuscript polishing |
+| **Horizon-Journal-Recommender** | Available | Verified target-journal shortlisting and fit checks |
 | **Horizon-Aurora** | Testing | Exhaustive manuscript-level polishing and consistency review |
 
 Only released skills are included in `skills/`; testing and planned skills do not have placeholder directories.
@@ -55,6 +56,20 @@ Afterglow uses one integrated rewrite followed by fidelity verification, a globa
 | **Verification** | Compare an original and revision without rewriting |
 | **Consistency audit** | Check terminology, notation, numerical relationships, and references |
 
+## Horizon-Journal-Recommender
+
+Horizon-Journal-Recommender builds evidence-backed submission shortlists for finished or near-finished manuscripts. It profiles the paper, filters a broad candidate pool, live-verifies the finalists, and ranks them as Reach, Core, and Backup targets.
+
+Every recommended journal must be checked against official scope, current indexing and submission constraints, and recent related papers. OA/APC and review-speed claims remain source-attributed and explicitly uncertain when they cannot be verified.
+
+### Modes
+
+| Mode | Use case |
+|---|---|
+| **Recommendation** | Generate and rank a verified journal shortlist |
+| **Verification** | Check an existing shortlist or journal-fit claim |
+| **Single-journal fit** | Evaluate one named journal in depth |
+
 ## Install
 
 ### Codex
@@ -64,6 +79,7 @@ Ask the built-in installer to install a skill from its GitHub subdirectory:
 ```text
 $skill-installer https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/main/skills/horizon-ember
 $skill-installer https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/main/skills/horizon-afterglow
+$skill-installer https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/main/skills/horizon-journal-recommender
 ```
 
 After installation, Codex can select the appropriate skill automatically when a request matches its description. You can also invoke one explicitly:
@@ -71,6 +87,7 @@ After installation, Codex can select the appropriate skill automatically when a 
 ```text
 $horizon-ember
 $horizon-afterglow
+$horizon-journal-recommender
 ```
 
 ### Claude Code
@@ -81,17 +98,18 @@ Clone the repository and copy the skill directory into your personal skills dire
 git clone https://github.com/yujie-jason-zhang/horizon-academic-writing.git
 cp -r horizon-academic-writing/skills/horizon-ember ~/.claude/skills/
 cp -r horizon-academic-writing/skills/horizon-afterglow ~/.claude/skills/
+cp -r horizon-academic-writing/skills/horizon-journal-recommender ~/.claude/skills/
 ```
 
 Copy only the skill or skills you want. For a project-local installation, use the project's `.claude/skills/` directory instead.
 
-Invoke Ember explicitly with `/horizon-ember`, or let Claude select it from the request. The optional `agents/openai.yaml` file supplies OpenAI UI metadata; Claude Code uses the shared `SKILL.md`, references, and scripts and does not require that metadata.
+Invoke a skill explicitly with `/horizon-ember`, `/horizon-afterglow`, or `/horizon-journal-recommender`, or let Claude select it from the request. The optional `agents/openai.yaml` files supply OpenAI UI metadata; Claude Code uses the shared `SKILL.md` and bundled resources and does not require that metadata.
 
 ### Packaged-skill clients
 
-For clients that accept a skill folder or ZIP archive, package only the selected directory under `skills/`. The archive should contain a single top-level skill directory with `SKILL.md`, `agents/`, `references/`, and `scripts/` inside it—not the entire repository.
+For clients that accept a skill folder or ZIP archive, package only the selected directory under `skills/`. The archive should contain a single top-level skill directory with `SKILL.md` and its applicable `agents/`, `references/`, or `scripts/` resources—not the entire repository.
 
-The same Horizon-Ember directory can be installed in Codex and Claude Code; separate platform-specific copies are not required.
+The same skill directory can be installed in Codex and Claude Code; separate platform-specific copies are not required.
 
 The skill itself is Markdown. Its optional preservation checker requires Python 3.9 or later and has no third-party dependencies.
 
@@ -109,6 +127,9 @@ Language-edit main.tex for journal submission. Keep the diff minimal.
 Translate this Chinese abstract into English and polish it.
 Fix the AI-sounding voice without changing any claims.
 Check whether this revision changed any numbers, citations, or equations.
+Recommend and verify target journals for this manuscript.
+请根据这篇论文推荐投稿期刊，并核实收录、OA/APC 和近期相关论文。
+Check whether this journal is a realistic submission target for my paper.
 ```
 
 ## Preservation checker
@@ -180,17 +201,23 @@ A lower-priority improvement must never damage a higher-priority one.
     │   │   └── paragraph_writing.md
     │   └── scripts/
     │       └── check_preservation.py
-    └── horizon-afterglow/
+    ├── horizon-afterglow/
+    │   ├── SKILL.md
+    │   ├── agents/
+    │   │   └── openai.yaml
+    │   ├── references/
+    │   │   ├── context_and_workflow.md
+    │   │   ├── fidelity_and_tex.md
+    │   │   ├── quality_control.md
+    │   │   └── writing_rules.md
+    │   └── scripts/
+    │       └── check_preservation.py
+    └── horizon-journal-recommender/
         ├── SKILL.md
         ├── agents/
         │   └── openai.yaml
-        ├── references/
-        │   ├── context_and_workflow.md
-        │   ├── fidelity_and_tex.md
-        │   ├── quality_control.md
-        │   └── writing_rules.md
-        └── scripts/
-            └── check_preservation.py
+        └── references/
+            └── journal_recommendation_guide.md
 ```
 
 Each released skill lives directly under `skills/`, and its directory name matches the `name` in its `SKILL.md` frontmatter.
@@ -202,6 +229,7 @@ The repository uses skill-scoped semantic version tags:
 ```text
 horizon-ember-v1.0.0
 horizon-afterglow-v1.0.0
+horizon-journal-recommender-v1.0.0
 ```
 
 This keeps releases unambiguous as more Horizon skills are added.

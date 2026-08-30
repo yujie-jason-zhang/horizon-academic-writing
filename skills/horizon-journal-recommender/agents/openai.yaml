@@ -1,0 +1,4 @@
+interface:
+  display_name: "Horizon Journal Recommender"
+  short_description: "Verify and rank journals for manuscript submission"
+  default_prompt: "Use $horizon-journal-recommender to recommend and verify target journals for this manuscript."

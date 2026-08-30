@@ -15,6 +15,7 @@ Horizon 将学术写作视为技术沟通，而不是一般性的文本生成。
 |---|---|---|
 | **Horizon-Ember** | 可用 | 聚焦单个段落的学术润色 |
 | **Horizon-Afterglow** | 可用 | 均衡、读者导向的论文润色 |
+| **Horizon-Journal-Recommender** | 可用 | 经核验的目标期刊推荐与匹配度检查 |
 | **Horizon-Aurora** | 测试中 | 穷尽式全文润色与一致性审查 |
 
 `skills/` 目录只收录已经发布的 Skills；测试中和计划中的 Skills 不设置占位目录。
@@ -55,6 +56,20 @@ Afterglow 先进行一次整合式改写，再执行保真核查、全局读者�
 | **核查** | 比较原文与修订稿，不进行改写 |
 | **一致性审查** | 检查术语、符号、数值关系和引用 |
 
+## Horizon-Journal-Recommender
+
+Horizon-Journal-Recommender 为已完成或接近完成的论文生成有证据支持的投稿期刊清单。它首先分析稿件，对大范围候选期刊进行初筛，再实时核验入围期刊，最终将其划分为 Reach、Core 和 Backup。
+
+每本推荐期刊都必须核对官方收稿范围、当前收录与投稿约束，以及近期相关论文。OA/APC 和审稿速度信息需要注明来源；无法核实时必须明确保留不确定性。
+
+### 模式
+
+| 模式 | 使用场景 |
+|---|---|
+| **推荐** | 生成并排序经核验的期刊清单 |
+| **核查** | 核对现有清单或期刊匹配性判断 |
+| **单期刊匹配** | 深入评估一本指定期刊 |
+
 ## 安装
 
 ### Codex
@@ -64,6 +79,7 @@ Afterglow 先进行一次整合式改写，再执行保真核查、全局读者�
 ```text
 $skill-installer https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/main/skills/horizon-ember
 $skill-installer https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/main/skills/horizon-afterglow
+$skill-installer https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/main/skills/horizon-journal-recommender
 ```
 
 安装后，当请求与 Skill 描述匹配时，Codex 可以自动选择相应 Skill；也可以显式调用：
@@ -71,6 +87,7 @@ $skill-installer https://github.com/yujie-jason-zhang/horizon-academic-writing/t
 ```text
 $horizon-ember
 $horizon-afterglow
+$horizon-journal-recommender
 ```
 
 ### Claude Code
@@ -81,17 +98,18 @@ $horizon-afterglow
 git clone https://github.com/yujie-jason-zhang/horizon-academic-writing.git
 cp -r horizon-academic-writing/skills/horizon-ember ~/.claude/skills/
 cp -r horizon-academic-writing/skills/horizon-afterglow ~/.claude/skills/
+cp -r horizon-academic-writing/skills/horizon-journal-recommender ~/.claude/skills/
 ```
 
 只需复制自己需要的 Skill。若要在单个项目中安装，请改用项目内的 `.claude/skills/` 目录。
 
-可以通过 `/horizon-ember` 显式调用 Ember，也可以让 Claude 根据请求自动选择。可选文件 `agents/openai.yaml` 用于 OpenAI 界面元数据；Claude Code 使用共用的 `SKILL.md`、references 和 scripts，不依赖该元数据文件。
+可以通过 `/horizon-ember`、`/horizon-afterglow` 或 `/horizon-journal-recommender` 显式调用 Skill，也可以让 Claude 根据请求自动选择。可选的 `agents/openai.yaml` 文件用于 OpenAI 界面元数据；Claude Code 使用共用的 `SKILL.md` 和随附资源，不依赖该元数据。
 
 ### 支持 Skill 文件夹或 ZIP 的客户端
 
-如果客户端接受 Skill 文件夹或 ZIP，只打包 `skills/` 下所选的 Skill 目录。压缩包内应包含一个顶层 Skill 目录，其中含有 `SKILL.md`、`agents/`、`references/` 和 `scripts/`，而不是整个仓库。
+如果客户端接受 Skill 文件夹或 ZIP，只打包 `skills/` 下所选的 Skill 目录。压缩包内应包含一个顶层 Skill 目录，其中含有 `SKILL.md` 和实际使用的 `agents/`、`references/` 或 `scripts/` 资源，而不是整个仓库。
 
-同一份 Horizon-Ember 目录可以同时安装到 Codex 和 Claude Code，不需要维护不同平台的副本。
+同一份 Skill 目录可以同时安装到 Codex 和 Claude Code，不需要维护不同平台的副本。
 
 Skill 本身由 Markdown 构成。可选保真检查器要求 Python 3.9 或更高版本，不依赖第三方包。
 
@@ -109,6 +127,9 @@ Language-edit main.tex for journal submission. Keep the diff minimal.
 Translate this Chinese abstract into English and polish it.
 Fix the AI-sounding voice without changing any claims.
 Check whether this revision changed any numbers, citations, or equations.
+Recommend and verify target journals for this manuscript.
+请根据这篇论文推荐投稿期刊，并核实收录、OA/APC 和近期相关论文。
+Check whether this journal is a realistic submission target for my paper.
 ```
 
 ## 保真检查器
@@ -180,17 +201,23 @@ Ember 始终以段落为编辑单位：句子修改服务于整个段落，相�
     │   │   └── paragraph_writing.md
     │   └── scripts/
     │       └── check_preservation.py
-    └── horizon-afterglow/
+    ├── horizon-afterglow/
+    │   ├── SKILL.md
+    │   ├── agents/
+    │   │   └── openai.yaml
+    │   ├── references/
+    │   │   ├── context_and_workflow.md
+    │   │   ├── fidelity_and_tex.md
+    │   │   ├── quality_control.md
+    │   │   └── writing_rules.md
+    │   └── scripts/
+    │       └── check_preservation.py
+    └── horizon-journal-recommender/
         ├── SKILL.md
         ├── agents/
         │   └── openai.yaml
-        ├── references/
-        │   ├── context_and_workflow.md
-        │   ├── fidelity_and_tex.md
-        │   ├── quality_control.md
-        │   └── writing_rules.md
-        └── scripts/
-            └── check_preservation.py
+        └── references/
+            └── journal_recommendation_guide.md
 ```
 
 每个已发布的 Skill 都直接位于 `skills/` 下，其目录名称与 `SKILL.md` frontmatter 中的 `name` 一致。
@@ -202,6 +229,7 @@ Ember 始终以段落为编辑单位：句子修改服务于整个段落，相�
 ```text
 horizon-ember-v1.0.0
 horizon-afterglow-v1.0.0
+horizon-journal-recommender-v1.0.0
 ```
 
 随着 Horizon Skills 数量增加，这种方式可以让每次发布保持清晰明确。
