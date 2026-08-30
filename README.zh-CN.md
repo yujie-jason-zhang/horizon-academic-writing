@@ -46,6 +46,8 @@ Horizon-Afterglow 是 Horizon 系列中的均衡型工具。它可以润色英�
 
 Afterglow 先进行一次整合式改写，再执行保真核查、全局读者通读和定点修复。它不评估创新性、不重新设计贡献、不构建文献缺口，也不修复科学论证本身尚不稳定的论文。
 
+1.1.0 **Cinderella** 版新增“主张前置”（Claim-Forward Framing）：在证据允许时直接陈述受支持的要点，同时继续保护证据所要求的不确定性表达、局限性、边界条件和具有科学意义的否定表述。
+
 ### 模式
 
 | 模式 | 使用场景 |
@@ -228,7 +230,7 @@ Ember 始终以段落为编辑单位：句子修改服务于整个段落，相�
 
 ```text
 horizon-ember-v1.0.0
-horizon-afterglow-v1.0.0
+horizon-afterglow-v1.1.0
 horizon-journal-recommender-v1.0.0
 ```
 

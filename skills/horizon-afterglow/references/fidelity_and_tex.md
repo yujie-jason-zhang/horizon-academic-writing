@@ -1,5 +1,18 @@
 # Fidelity and TeX Safety
 
+## Contents
+
+- [Purpose](#purpose)
+- [1. Claims](#1-claims)
+- [2. Agency and Causality](#2-agency-and-causality)
+- [3. Numerical Semantic Binding](#3-numerical-semantic-binding)
+- [4. Mathematics](#4-mathematics)
+- [5. TeX Structure](#5-tex-structure)
+- [6. Citations](#6-citations)
+- [7. Terminology](#7-terminology)
+- [8. Notation and Numerical Consistency](#8-notation-and-numerical-consistency)
+- [9. Preservation Checker](#9-preservation-checker)
+
 ## Purpose
 
 Protect the scientific content while allowing enough freedom for reader-oriented editing.
@@ -22,6 +35,18 @@ Do not make shifts such as:
 - `suggests` → `demonstrates`;
 - `associated with` → `causes`;
 - `outperforms on Dataset A` → `outperforms`.
+
+### Claim-forward safety
+
+Claim-forward framing must not change epistemic status or scientific boundaries. Preserve:
+
+- evidence-required hedges and modal verbs;
+- methodological limitations;
+- boundary conditions;
+- locally necessary caveats;
+- negative formulations that carry distinct scientific or argumentative meaning.
+
+A more direct sentence is acceptable only when it preserves the same claim, scope, uncertainty, and limitation content.
 
 ## 2. Agency and Causality
 

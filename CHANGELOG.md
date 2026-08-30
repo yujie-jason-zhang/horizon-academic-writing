@@ -4,6 +4,18 @@ All notable public changes to the Horizon academic-writing skills are documented
 
 ## [Unreleased]
 
+## [Horizon-Afterglow 1.1.0] — Cinderella — 2026-08-30
+
+### Added
+
+- Added claim-forward framing to state supported points more directly while preserving claim strength, uncertainty, scope, limitations, and boundary conditions.
+- Added claim-forward checks to unified diagnosis, the integrated rewrite, fidelity verification, the global reader pass, and final quality control.
+- Added contents navigation to the longer Afterglow reference guides and direct links from `SKILL.md` to bundled resources.
+
+### Changed
+
+- Reframed the scope example from an author-centered disclaimer to an evidence-centered statement that retains the original generalizability limitation.
+
 ## [Horizon-Journal-Recommender 1.0.0] — 2026-08-30
 
 ### Added
@@ -31,7 +43,8 @@ All notable public changes to the Horizon academic-writing skills are documented
 - Added LaTeX/TeX preservation guidance for protected structures, mathematics, numerical bindings, citations, and cross-references.
 - Added a dependency-free Python preservation checker with strict, reader-oriented, project, structural-reordering, and advisory style modes.
 
-[Unreleased]: https://github.com/yujie-jason-zhang/horizon-academic-writing/compare/horizon-journal-recommender-v1.0.0...HEAD
+[Unreleased]: https://github.com/yujie-jason-zhang/horizon-academic-writing/compare/horizon-afterglow-v1.1.0...HEAD
+[Horizon-Afterglow 1.1.0]: https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/horizon-afterglow-v1.1.0
 [Horizon-Journal-Recommender 1.0.0]: https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/horizon-journal-recommender-v1.0.0
 [Horizon-Ember 1.0.0]: https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/horizon-ember-v1.0.0
 [Horizon-Afterglow 1.0.0]: https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/horizon-afterglow-v1.0.0

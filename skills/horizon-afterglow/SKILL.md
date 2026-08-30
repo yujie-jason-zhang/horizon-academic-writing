@@ -123,7 +123,7 @@ For each important paragraph, identify what the reader already knows, the paragr
 
 Do not treat a paragraph as an isolated paraphrasing task when broader context is available.
 
-See `references/context_and_workflow.md`.
+See the [context and workflow guide](references/context_and_workflow.md).
 
 ## Pass 2 — Lock Meaning
 
@@ -139,7 +139,7 @@ Before rewriting, preserve:
 - citations;
 - protected TeX.
 
-See `references/fidelity_and_tex.md`.
+See the [fidelity and TeX guide](references/fidelity_and_tex.md).
 
 ## Pass 3 — Unified Diagnosis
 
@@ -149,16 +149,17 @@ Prioritize:
 
 1. paragraph function and section progression;
 2. sentence-to-sentence cohesion and old-to-new information flow;
-3. visibility of the main action and avoidable syntactic load;
+3. claim-forward framing, especially redundant disclaimers, repeated caveats, or unnecessary negative-scope framing;
 4. lexical and phrase precision;
-5. misplaced emphasis;
-6. repetitive sentence rhythm or decorative parallelism;
-7. high-value formulaic or over-formal academic patterns;
-8. obvious repeated or inflated claims.
+5. visibility of the main action and avoidable syntactic load;
+6. misplaced emphasis;
+7. repetitive sentence rhythm or decorative parallelism;
+8. high-value formulaic or over-formal academic patterns;
+9. obvious repeated or inflated claims.
 
 Do not attempt to optimize every possible stylistic dimension in every sentence.
 
-See `references/writing_rules.md`.
+See the [writing rules](references/writing_rules.md).
 
 ## Pass 4 — One Integrated Rewrite
 
@@ -168,14 +169,17 @@ Edit in this order:
 
 1. repair paragraph progression and local logic;
 2. improve sentence-to-sentence cohesion and information flow;
-3. improve lexical and phrase precision where wording is vague, unnatural, or overstated;
-4. simplify avoidable syntactic complexity;
-5. improve emphasis where it clearly helps comprehension;
-6. break nonfunctional repetitive rhythm and decorative parallelism;
-7. remove empty or formulaic academic phrasing;
-8. polish grammar, punctuation, and concision.
+3. improve claim-forward framing when the supported point is buried under redundant defensive wording;
+4. improve lexical and phrase precision where wording is vague, unnatural, or overstated;
+5. simplify avoidable syntactic complexity;
+6. improve emphasis where it clearly helps comprehension;
+7. break nonfunctional repetitive rhythm and decorative parallelism;
+8. remove empty or formulaic academic phrasing;
+9. polish grammar, punctuation, and concision.
 
-Prefer the clearest and most precise wording that preserves the full technical meaning. `references/writing_rules.md` §4 defines what natural academic voice does and does not mean; apply it here rather than restating it.
+Claim-forward framing is **not** claim strengthening. Never remove epistemic hedges, methodological limitations, boundary conditions, or other qualifications required by the evidence merely to make the prose sound more direct or confident.
+
+Prefer the clearest and most precise wording that preserves the full technical meaning. The [claim-forward framing and natural-voice rules](references/writing_rules.md#4-claim-forward-framing) define the applicable boundaries; use them here rather than restating them.
 
 ## Pass 5 — Technical Fidelity Verification
 
@@ -207,6 +211,8 @@ Check:
 - abrupt sentence pairs where a valid relation is under-signaled;
 - places where transitions over-explain an already obvious relation;
 - repeated explanations or claims;
+- repeated caveats, disclaimers, or negative-scope statements that unnecessarily interrupt the argument;
+- places where defensive framing obscures the supported point or its actual scope;
 - abrupt topic shifts;
 - obvious voice inconsistency;
 - whether important claims drift in strength across sections.
@@ -215,7 +221,7 @@ When adjacent sentences feel abrupt, determine whether a real relation exists. I
 
 This is a reader pass, not a second free rewrite.
 
-Use the failure signals in `references/quality_control.md` to decide what needs repair.
+Use the [quality-control failure signals](references/quality_control.md) to decide what needs repair.
 
 ## Pass 7 — Targeted Repair
 
@@ -344,9 +350,10 @@ Before delivery, confirm that:
 - wording is precise, natural, and proportional rather than needlessly elevated;
 - repetitive rhythm is broken when stylistic, but functional parallelism is preserved;
 - major AI-like academic templates have been reduced;
+- supported claims are stated directly when possible without weakening required uncertainty or limitations;
 - claims remain proportional to evidence;
 - no unintended scientific drift was introduced.
 
-Work through the Final Reader Test in `references/quality_control.md` if any of these is uncertain.
+Work through the [Final Reader Test](references/quality_control.md#final-reader-test) if any of these is uncertain.
 
 If the prose is technically safe but still unnecessarily difficult to read, polishing is not complete.

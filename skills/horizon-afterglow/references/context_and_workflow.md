@@ -1,5 +1,15 @@
 # Context and Workflow
 
+## Contents
+
+- [Purpose](#purpose)
+- [1. Manuscript Context](#1-manuscript-context)
+- [2. Paragraph Context](#2-paragraph-context)
+- [3. Scientific Claim Logic](#3-scientific-claim-logic)
+- [4. One-Repair Principle](#4-one-repair-principle)
+- [5. Minimal-Change Preference](#5-minimal-change-preference)
+- [6. Source Problems](#6-source-problems)
+
 ## Purpose
 
 Provide enough manuscript context to avoid sentence-by-sentence polishing without performing the full-profile manuscript analysis.

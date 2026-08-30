@@ -46,6 +46,8 @@ It addresses two common failure modes:
 
 Afterglow uses one integrated rewrite followed by fidelity verification, a global reader pass, and targeted repair. It does not assess novelty, redesign contributions, construct literature gaps, or repair a scientifically unstable argument.
 
+Version 1.1.0, **Cinderella**, adds claim-forward framing: supported points should be stated directly when possible, while evidence-required hedges, limitations, boundary conditions, and scientifically meaningful negative formulations remain protected.
+
 ### Modes
 
 | Mode | Use case |
@@ -228,7 +230,7 @@ The repository uses skill-scoped semantic version tags:
 
 ```text
 horizon-ember-v1.0.0
-horizon-afterglow-v1.0.0
+horizon-afterglow-v1.1.0
 horizon-journal-recommender-v1.0.0
 ```
 

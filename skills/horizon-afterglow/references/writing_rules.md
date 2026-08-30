@@ -1,5 +1,20 @@
 # Writing Rules
 
+## Contents
+
+- [Purpose](#purpose)
+- [1. Information Flow](#1-information-flow)
+- [2. Reader Expectations](#2-reader-expectations)
+- [3. Cognitive Load](#3-cognitive-load)
+- [4. Claim-Forward Framing](#4-claim-forward-framing)
+- [5. Natural Academic Voice](#5-natural-academic-voice)
+- [6. High-Value AI-Pattern Checks](#6-high-value-ai-pattern-checks)
+- [7. Sentence Rhythm and Cadence](#7-sentence-rhythm-and-cadence)
+- [8. Parallelism and Three-Part Lists](#8-parallelism-and-three-part-lists)
+- [9. Paragraph-Level Template Repetition](#9-paragraph-level-template-repetition)
+- [10. Concision](#10-concision)
+- [11. Compact Section Guidance](#11-compact-section-guidance)
+
 ## Purpose
 
 Improve scientific readability, information flow, and natural academic voice without applying the Horizon-Aurora's exhaustive style diagnostics.
@@ -79,7 +94,47 @@ Ask:
 
 If yes, simplify the structure without reducing technical precision.
 
-## 4. Natural Academic Voice
+## 4. Claim-Forward Framing
+
+Improve directness without increasing claim strength.
+
+State the supported scientific point and its actual scope as directly as the evidence allows. Keep this rule subordinate to technical fidelity, evidence-proportional uncertainty, accurate claim scope, and real methodological or scientific limitations.
+
+### State the supported point and scope directly
+
+When possible, organize the sentence or paragraph around what was studied, what was observed, what the evidence supports, and what scope the conclusion covers.
+
+Prefer an accurate, evidence-centered scope statement over an author-centered disclaimer when the two are scientifically equivalent. For example:
+
+`The present evidence does not establish that the method generalizes to all populations.`
+
+may be preferable to:
+
+`We do not claim that the method generalizes to all populations.`
+
+Do not make this transformation when the negative formulation carries an independent scientific, methodological, or argumentative function. Never broaden the claim while making the scope more direct.
+
+### Reduce redundant defensive framing
+
+Review repeated constructions such as `We do not claim that ...`, `This should not be interpreted as ...`, or `It is important to clarify that ...`.
+
+These constructions are not inherently undesirable. Reduce them only when they mainly repeat information already expressed through scope, uncertainty, conditions, or limitations. Keep them when they prevent a genuine and otherwise likely misinterpretation.
+
+### Preserve scientific uncertainty
+
+Never remove a hedge merely because it sounds cautious. Preserve `may`, `might`, `could`, `suggests`, `is associated with`, and similar markers when the evidence requires them.
+
+Distinguish evidence-required **epistemic qualification** from repeated **rhetorical padding**. Only the second should be reduced.
+
+### Avoid repeated caveat interruption
+
+A necessary limitation should remain visible, but it should not repeatedly interrupt the argument without adding information. Keep it where correct interpretation requires it; shorten later repetitions when the boundary is already established; retain it locally when removal would make a claim misleading.
+
+Core rule:
+
+> **Prefer direct, scope-accurate scientific statements over redundant defensive framing. Remove caution only when precision can replace it; never trade epistemic accuracy for rhetorical confidence.**
+
+## 5. Natural Academic Voice
 
 Do not equate academic quality with:
 
@@ -109,7 +164,7 @@ A phrase may be grammatically correct but still be poor if it is vague, unnatura
 
 Do not replace a simple accurate expression with a rarer or more formal alternative unless precision improves.
 
-## 5. High-Value AI-Pattern Checks
+## 6. High-Value AI-Pattern Checks
 
 Focus on the most common patterns.
 
@@ -143,7 +198,7 @@ Reduce `It is worth noting that`, `Importantly`, and similar framing when the se
 
 Do not automatically close result paragraphs with a generic sentence claiming effectiveness or robustness when no new interpretation is added.
 
-## 6. Sentence Rhythm and Cadence
+## 7. Sentence Rhythm and Cadence
 
 Avoid long stretches where consecutive sentences share nearly the same:
 
@@ -163,7 +218,7 @@ Use this rule:
 
 > **Break repeated rhythm when repetition is stylistic; preserve repeated structure when the science itself is parallel.**
 
-## 7. Parallelism and Three-Part Lists
+## 8. Parallelism and Three-Part Lists
 
 Parallel structure is useful when the scientific elements are genuinely parallel.
 
@@ -184,7 +239,7 @@ For items such as `robust, efficient, and scalable`, ask whether each term:
 
 Do not force a list to contain three items.
 
-## 8. Paragraph-Level Template Repetition
+## 9. Paragraph-Level Template Repetition
 
 Check whether several adjacent paragraphs repeatedly use the same:
 
@@ -195,7 +250,7 @@ Check whether several adjacent paragraphs repeatedly use the same:
 
 Change the pattern only when the repetition reflects writing habit rather than genuine argumentative structure.
 
-## 9. Concision
+## 10. Concision
 
 Delete material that adds no scientific information.
 
@@ -207,7 +262,7 @@ Do not delete:
 - comparison scope;
 - necessary mechanism details.
 
-## 10. Compact Section Guidance
+## 11. Compact Section Guidance
 
 ### Abstract
 
