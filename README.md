@@ -18,8 +18,9 @@ Horizon treats scholarly writing as technical communication rather than generic 
 | **Horizon-Aurora** | Available | Manuscript-level polishing, cross-section claim alignment, and final fidelity checks |
 | **Horizon-Aegis** | Available | Scientific defensibility, evidence, and implementation audits |
 | **Horizon-Journal-Recommender** | Available | Verified target-journal shortlisting and fit checks |
+| **Horizon-Jade** | Testing | Chinese STEM thesis chapter polishing and cross-chapter consistency assistance |
 
-Only released skills are included in `skills/`; testing and planned skills do not have placeholder directories.
+The `skills/` directory contains implemented skills; the table above distinguishes available and testing versions. Planned skills do not have placeholder directories.
 
 ## Horizon-Ember
 
@@ -117,6 +118,22 @@ Every recommended journal must be checked against official scope, current indexi
 | **Recommendation** | Generate and rank a verified journal shortlist |
 | **Verification** | Check an existing shortlist or journal-fit claim |
 | **Single-journal fit** | Evaluate one named journal in depth |
+
+## Horizon-Jade
+
+Horizon-Jade polishes specified chapters of Chinese STEM master's and doctoral theses and checks terminology, notation, numerical bindings, references, and contributions across the supplied material. Word is the primary file workflow; pasted chapter text is also supported.
+
+It preserves claim strength in both directions, flags source uncertainties separately, supports sequential and parallel chapter structures, and maintains resumable context for multi-chapter work. Word editing and verification use document capabilities available in the host environment. Jade remains in testing; see the [skill entrypoint](skills/horizon-jade/SKILL.md).
+
+### Modes
+
+| Mode | Use case |
+|---|---|
+| **Chapter polishing** | Improve progression and expression in specified Chinese thesis chapters |
+| **Minimal changes** | Correct necessary language issues while preserving paragraph organization |
+| **Structure and consistency review** | Check chapter roles, contributions, terminology, notation, and numerical consistency |
+| **English material adaptation** | Render supplied research material faithfully in academic Chinese |
+| **Verification** | Compare the source and revision without rewriting |
 
 ## Install
 
@@ -315,6 +332,18 @@ The audit distinguishes observed defects from unchecked material and tests only 
     │       ├── implementation-fidelity.md
     │       ├── method-consistency.md
     │       └── validation-audit.md
+    ├── horizon-jade/
+    │   ├── SKILL.md
+    │   ├── agents/
+    │   │   └── openai.yaml
+    │   └── references/
+    │       ├── chinese_discourse.md
+    │       ├── context_and_workflow.md
+    │       ├── quality_control.md
+    │       ├── scientific_fidelity.md
+    │       ├── section_guidance.md
+    │       ├── thesis_mode.md
+    │       └── word_workflow.md
     └── horizon-journal-recommender/
         ├── SKILL.md
         ├── agents/

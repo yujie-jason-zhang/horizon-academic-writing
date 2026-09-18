@@ -1,0 +1,4 @@
+interface:
+  display_name: "Horizon Jade"
+  short_description: "理工科中文硕博士学位论文的章节润色、科学保真与跨章节一致性辅助"
+  default_prompt: "使用 $horizon-jade 润色我的中文学位论文指定章节，保留科学含义、论断强度、数字与引用，并核对已提供章节中的一致性。"

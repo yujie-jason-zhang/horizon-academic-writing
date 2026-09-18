@@ -6,6 +6,8 @@ All notable public changes to the Horizon academic-writing skills are documented
 
 ### Added
 
+- Added **Horizon-Jade 0.1.0** as a testing skill for Chinese STEM thesis chapter polishing and cross-chapter consistency assistance, with Word-oriented document handling.
+- Added Jade guidance for bounded structural editing, scientific-claim preservation in both directions, and resumable chapter records.
 - Added **Horizon-Aurora 1.0.0** for manuscript-level polishing, cross-section claim alignment, section-aware guidance, and focused consistency review, with six editing and review modes.
 - Added final-artifact fidelity verification, independent source/candidate project handling, and explicit full/partial coverage reporting.
 - Added Aurora checker protection for preambles and supported table alignment, required traversal for included files, citation/reference-only reordering, advisory style findings, custom macro registration, and translation-aware quantity checks with documented manual-review boundaries.

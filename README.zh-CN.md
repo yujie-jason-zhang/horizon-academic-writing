@@ -18,8 +18,9 @@ Horizon 将学术写作视为技术沟通，而不是一般性的文本生成。
 | **Horizon-Aurora** | 可用 | 全文润色、跨章节主张对齐与最终保真核查 |
 | **Horizon-Aegis** | 可用 | 科学论证、证据充分性与实现一致性审查 |
 | **Horizon-Journal-Recommender** | 可用 | 经核验的目标期刊推荐与匹配度检查 |
+| **Horizon-Jade** | 测试中 | 理工科中文学位论文的章节润色与跨章节一致性辅助 |
 
-`skills/` 目录只收录已经发布的 Skills；测试中和计划中的 Skills 不设置占位目录。
+`skills/` 目录收录已有实现的 Skills；可用与测试状态见上表，不为计划中的 Skills 设置占位目录。
 
 ## Horizon-Ember
 
@@ -117,6 +118,22 @@ Horizon-Journal-Recommender 为已完成或接近完成的论文生成有证据�
 | **推荐** | 生成并排序经核验的期刊清单 |
 | **核查** | 核对现有清单或期刊匹配性判断 |
 | **单期刊匹配** | 深入评估一本指定期刊 |
+
+## Horizon-Jade
+
+Horizon-Jade 面向理工科中文硕博士学位论文，以 Word 为主要文件使用场景，也支持粘贴章节文本。它改善指定章节的信息推进与科技表达，并在实际读取的材料范围内核对术语、符号、数字、引用和贡献表述。
+
+默认保留科学论断强度，对原稿疑点单独标注；支持串行或并列章节结构，多章任务维护可恢复的上下文记录。Word 编辑与核验依赖运行环境提供的文档能力。当前仍为测试版，详见 [技能入口](skills/horizon-jade/SKILL.md)。
+
+### 模式
+
+| 模式 | 使用场景 |
+|---|---|
+| **章节润色** | 改善指定中文学位论文章节的信息推进与表达 |
+| **最小改动** | 只处理必要语病和冗余，保留段落组织 |
+| **结构与跨章核对** | 检查章节职责、贡献和术语、符号、数值一致性 |
+| **英文材料转写** | 将已提供研究材料忠实转写为中文学术表达 |
+| **核查** | 比较原稿与修订稿，不进行改写 |
 
 ## 安装
 
@@ -315,6 +332,18 @@ Aurora 在章节之间保持论文级上下文，并在全部修复完成后核�
     │       ├── implementation-fidelity.md
     │       ├── method-consistency.md
     │       └── validation-audit.md
+    ├── horizon-jade/
+    │   ├── SKILL.md
+    │   ├── agents/
+    │   │   └── openai.yaml
+    │   └── references/
+    │       ├── chinese_discourse.md
+    │       ├── context_and_workflow.md
+    │       ├── quality_control.md
+    │       ├── scientific_fidelity.md
+    │       ├── section_guidance.md
+    │       ├── thesis_mode.md
+    │       └── word_workflow.md
     └── horizon-journal-recommender/
         ├── SKILL.md
         ├── agents/
