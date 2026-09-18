@@ -11,6 +11,22 @@ All notable public changes to the Horizon academic-writing skills are documented
 - Added Aurora checker protection for preambles and supported table alignment, required traversal for included files, citation/reference-only reordering, advisory style findings, custom macro registration, and translation-aware quantity checks with documented manual-review boundaries.
 - Added 36 CLI regression tests covering preservation, project traversal, translation, and custom macro handling.
 
+## [Horizon-Aegis 1.0.0] — 2026-09-17
+
+### Added
+
+- Released **Horizon-Aegis**, the read-only scientific-defensibility auditor in the Horizon family, with full and fast audit modes.
+- Added novelty verification, method and reported-number consistency checks, claim-evidence mapping, baseline and ablation review, and statistical-rigor guidance.
+- Added conditional implementation-fidelity review with AUTO / ON / OFF modes, including hidden mechanisms, baseline fairness, and the result-generating path; missing artifacts remain an audit limitation rather than a manuscript defect.
+- Added claim-specific S0-S4 severity and E0-E5 evidence calibration, reviewer objections, and minimum decisive repair recommendations.
+- Added portable inspection instructions, traceable findings, UI metadata, and English/Chinese installation and usage documentation.
+
+### Publication review
+
+- Aligned the initial public version to 1.0.0 and the directory name to `horizon-aegis`.
+- Corrected uncertainty guidance to assess between-method differences rather than infer significance from separate error-bar overlap.
+- Removed forced rating distributions and evidence-score quotas; retained independent replication as meaningful support and tied severity to the affected scientific claim.
+
 ## [Horizon-Afterglow 1.1.0] — Cinderella — 2026-08-30
 
 ### Added
@@ -51,6 +67,7 @@ All notable public changes to the Horizon academic-writing skills are documented
 - Added a dependency-free Python preservation checker with strict, reader-oriented, project, structural-reordering, and advisory style modes.
 
 [Unreleased]: https://github.com/yujie-jason-zhang/horizon-academic-writing/compare/horizon-afterglow-v1.1.0...HEAD
+[Horizon-Aegis 1.0.0]: https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/horizon-aegis-v1.0.0
 [Horizon-Afterglow 1.1.0]: https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/horizon-afterglow-v1.1.0
 [Horizon-Journal-Recommender 1.0.0]: https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/horizon-journal-recommender-v1.0.0
 [Horizon-Ember 1.0.0]: https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/horizon-ember-v1.0.0

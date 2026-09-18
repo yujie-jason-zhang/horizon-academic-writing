@@ -16,6 +16,7 @@ Horizon 将学术写作视为技术沟通，而不是一般性的文本生成。
 | **Horizon-Ember** | 可用 | 聚焦单个段落的学术润色 |
 | **Horizon-Afterglow** | 可用 | 均衡、读者导向的论文润色 |
 | **Horizon-Aurora** | 可用 | 全文润色、跨章节主张对齐与最终保真核查 |
+| **Horizon-Aegis** | 可用 | 科学论证、证据充分性与实现一致性审查 |
 | **Horizon-Journal-Recommender** | 可用 | 经核验的目标期刊推荐与匹配度检查 |
 
 `skills/` 目录只收录已经发布的 Skills；测试中和计划中的 Skills 不设置占位目录。
@@ -64,6 +65,24 @@ Horizon-Aurora 在论文润色流程中加入跨章节主张对齐、分章节�
 
 Aurora 保留独立的原稿与候选文件或项目副本。其保真检查器保护导言区和受支持的表格结构，在存在包含文件时要求项目遍历，并将结构重排的放宽范围限制为受支持的引文和交叉引用事件。原稿已有的标签、编号风格问题仅作提示。自定义宏可以显式登记；未登记的参数、跨语言数词和科学含义仍需人工核对。
 
+## Horizon-Aegis
+
+Horizon-Aegis 在投稿或大修前审查技术论文的结论能否经受审稿人的质疑。它核对创新性与已核验的相关工作、方法描述与报告数值的一致性、论断与证据的匹配关系，以及基线、消融和统计严谨性。
+
+它重点区分**有效性与归因／必要性**：方法有效，并不自动说明性能提升来自所声称的贡献，也不说明该贡献不可替代。Aegis 逐项评估核心论断，寻找可信的替代解释，并提出最小决定性证据、收窄论断或重构贡献的建议。
+
+提供实现材料时，它会沿论文描述、代码、配置和结果生成路径核对科学实现是否一致。未提供代码只限制审查范围，本身不构成论文缺陷。审查采用 S0-S4 严重程度和 E0-E5 证据等级，注明问题出处及未核验范围。
+
+Aegis 只读审查并返回判断与修复建议。语言润色由 Ember、Afterglow 或 Aurora 承担，目标期刊选择由 Journal Recommender 承担；Aegis 不撰写审稿回复，也不运行实验。
+
+### 模式
+
+| 模式 | 使用场景 |
+|---|---|
+| **完整审查** | 形成论断—证据矩阵，评估科学论证并按优先级提出修复建议 |
+| **快速审查** | 简述最大风险、最强替代解释和最小修复方案 |
+| **实现核查 AUTO / ON / OFF** | 有材料时自动核查、显式要求核查实现，或仅审查论文 |
+
 ## Horizon-Journal-Recommender
 
 Horizon-Journal-Recommender 为已完成或接近完成的论文生成有证据支持的投稿期刊清单。它首先分析稿件，对大范围候选期刊进行初筛，再实时核验入围期刊，最终将其划分为 Reach、Core 和 Backup。
@@ -88,6 +107,7 @@ Horizon-Journal-Recommender 为已完成或接近完成的论文生成有证据�
 $skill-installer https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/main/skills/horizon-ember
 $skill-installer https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/main/skills/horizon-afterglow
 $skill-installer https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/main/skills/horizon-aurora
+$skill-installer https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/main/skills/horizon-aegis
 $skill-installer https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/main/skills/horizon-journal-recommender
 ```
 
@@ -97,6 +117,7 @@ $skill-installer https://github.com/yujie-jason-zhang/horizon-academic-writing/t
 $horizon-ember
 $horizon-afterglow
 $horizon-aurora
+$horizon-aegis
 $horizon-journal-recommender
 ```
 
@@ -109,12 +130,13 @@ git clone https://github.com/yujie-jason-zhang/horizon-academic-writing.git
 cp -r horizon-academic-writing/skills/horizon-ember ~/.claude/skills/
 cp -r horizon-academic-writing/skills/horizon-afterglow ~/.claude/skills/
 cp -r horizon-academic-writing/skills/horizon-aurora ~/.claude/skills/
+cp -r horizon-academic-writing/skills/horizon-aegis ~/.claude/skills/
 cp -r horizon-academic-writing/skills/horizon-journal-recommender ~/.claude/skills/
 ```
 
 只需复制自己需要的 Skill。若要在单个项目中安装，请改用项目内的 `.claude/skills/` 目录。
 
-可以通过 `/horizon-ember`、`/horizon-afterglow`、`/horizon-aurora` 或 `/horizon-journal-recommender` 显式调用 Skill，也可以让 Claude 根据请求自动选择。可选的 `agents/openai.yaml` 文件用于 OpenAI 界面元数据；Claude Code 使用共用的 `SKILL.md` 和随附资源，不依赖该元数据。
+可以通过 `/horizon-ember`、`/horizon-afterglow`、`/horizon-aurora`、`/horizon-aegis` 或 `/horizon-journal-recommender` 显式调用 Skill，也可以让 Claude 根据请求自动选择。可选的 `agents/openai.yaml` 文件用于 OpenAI 界面元数据；Claude Code 使用共用的 `SKILL.md` 和随附资源，不依赖该元数据。
 
 ### 支持 Skill 文件夹或 ZIP 的客户端
 
@@ -138,6 +160,10 @@ Language-edit main.tex for journal submission. Keep the diff minimal.
 Translate this Chinese abstract into English and polish it.
 Fix the AI-sounding voice without changing any claims.
 Check whether this revision changed any numbers, citations, or equations.
+Audit this manuscript before submission: which central claims can the evidence defend?
+请审查这篇论文的创新性、方法与数值一致性，以及证据是否足以支持结论。
+Compare the supplied implementation with the paper and flag mismatches that affect its claims.
+请做一次快速科学审查，指出最大风险和最小修复方案，不改写论文。
 Recommend and verify target journals for this manuscript.
 请根据这篇论文推荐投稿期刊，并核实收录、OA/APC 和近期相关论文。
 Check whether this journal is a realistic submission target for my paper.
@@ -196,6 +222,16 @@ Ember 始终以段落为编辑单位：句子修改服务于整个段落，相�
 
 低优先级的改进不得损害高优先级目标。
 
+## Aegis 的工作流程
+
+```text
+清点论文与材料 → 提取核心论断 → 核验相关工作
+    → 检查方法与数值 → 有实现材料时核对代码
+    → 建立论断—证据矩阵 → 校准风险等级 → 提出最小修复建议
+```
+
+审查区分已发现的缺陷与尚未核验的材料，只要求实际论断所需要的证据。报告优先呈现主要科学风险，修复建议同时考虑补充证据、收窄论断与重构贡献。
+
 ## 仓库结构
 
 ```text
@@ -238,6 +274,15 @@ Ember 始终以段落为编辑单位：句子修改服务于整个段落，相�
     │   └── scripts/
     │       ├── check_preservation.py
     │       └── test_check_preservation.py
+    ├── horizon-aegis/
+    │   ├── SKILL.md
+    │   ├── agents/
+    │   │   └── openai.yaml
+    │   └── references/
+    │       ├── calibration.md
+    │       ├── implementation-fidelity.md
+    │       ├── method-consistency.md
+    │       └── validation-audit.md
     └── horizon-journal-recommender/
         ├── SKILL.md
         ├── agents/
@@ -255,6 +300,7 @@ Ember 始终以段落为编辑单位：句子修改服务于整个段落，相�
 ```text
 horizon-ember-v1.0.0
 horizon-afterglow-v1.1.0
+horizon-aegis-v1.0.0
 horizon-journal-recommender-v1.0.0
 ```
 

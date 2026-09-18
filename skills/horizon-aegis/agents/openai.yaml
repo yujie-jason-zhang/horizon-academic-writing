@@ -1,0 +1,4 @@
+interface:
+  display_name: "Horizon Aegis"
+  short_description: "Audit scientific claims, evidence, and implementation"
+  default_prompt: "Use $horizon-aegis to audit this manuscript for scientific defensibility and recommend the minimum decisive repairs."

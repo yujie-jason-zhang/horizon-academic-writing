@@ -16,6 +16,7 @@ Horizon treats scholarly writing as technical communication rather than generic 
 | **Horizon-Ember** | Available | Focused, paragraph-level academic polishing |
 | **Horizon-Afterglow** | Available | Balanced, reader-oriented manuscript polishing |
 | **Horizon-Aurora** | Available | Manuscript-level polishing, cross-section claim alignment, and final fidelity checks |
+| **Horizon-Aegis** | Available | Scientific defensibility, evidence, and implementation audits |
 | **Horizon-Journal-Recommender** | Available | Verified target-journal shortlisting and fit checks |
 
 Only released skills are included in `skills/`; testing and planned skills do not have placeholder directories.
@@ -64,6 +65,24 @@ Horizon-Aurora extends manuscript polishing with cross-section claim alignment, 
 
 Aurora keeps independent source and candidate files or project copies. Its preservation checker protects preambles and supported table structures, requires project traversal when includes are present, and limits structural reordering to supported citation/reference events. Existing label and numbering style issues are advisory. Custom macros can be registered explicitly; unregistered arguments, translated word-based quantities, and scientific meaning still require manual review.
 
+## Horizon-Aegis
+
+Horizon-Aegis audits whether a technical paper's conclusions can withstand a skeptical reviewer before submission or major revision. It checks novelty against verified prior work, consistency across methods and reported numbers, claim-evidence alignment, baselines, ablations, and statistical rigor.
+
+Its central distinction is **effectiveness versus attribution or necessity**: a method can work without establishing that the claimed contribution caused the improvement or was needed. Aegis evaluates each claim separately, identifies credible alternative explanations, and recommends the minimum decisive evidence, claim narrowing, or contribution reframing.
+
+When implementation artifacts are available, it traces the manuscript specification through code, configurations, and the result-generating path. Missing code limits the audit; it is not itself a manuscript defect. Findings use severity levels S0-S4 and evidence levels E0-E5, with source locations and explicit limits on what was checked.
+
+Aegis is read-only: it returns an assessment and repair recommendations. Language polishing belongs to Ember, Afterglow, or Aurora; target-journal selection belongs to Journal Recommender. Aegis does not draft rebuttal letters or run experiments.
+
+### Modes
+
+| Mode | Use case |
+|---|---|
+| **Full audit** | Scientific defensibility review with a claim-evidence matrix and prioritized repairs |
+| **Fast audit** | Brief judgment of the largest risk, strongest alternative explanation, and minimum repair |
+| **Implementation AUTO / ON / OFF** | Check supplied artifacts automatically, explicitly request implementation review, or audit the manuscript only |
+
 ## Horizon-Journal-Recommender
 
 Horizon-Journal-Recommender builds evidence-backed submission shortlists for finished or near-finished manuscripts. It profiles the paper, filters a broad candidate pool, live-verifies the finalists, and ranks them as Reach, Core, and Backup targets.
@@ -88,6 +107,7 @@ Ask the built-in installer to install a skill from its GitHub subdirectory:
 $skill-installer https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/main/skills/horizon-ember
 $skill-installer https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/main/skills/horizon-afterglow
 $skill-installer https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/main/skills/horizon-aurora
+$skill-installer https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/main/skills/horizon-aegis
 $skill-installer https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/main/skills/horizon-journal-recommender
 ```
 
@@ -97,6 +117,7 @@ After installation, Codex can select the appropriate skill automatically when a 
 $horizon-ember
 $horizon-afterglow
 $horizon-aurora
+$horizon-aegis
 $horizon-journal-recommender
 ```
 
@@ -109,12 +130,13 @@ git clone https://github.com/yujie-jason-zhang/horizon-academic-writing.git
 cp -r horizon-academic-writing/skills/horizon-ember ~/.claude/skills/
 cp -r horizon-academic-writing/skills/horizon-afterglow ~/.claude/skills/
 cp -r horizon-academic-writing/skills/horizon-aurora ~/.claude/skills/
+cp -r horizon-academic-writing/skills/horizon-aegis ~/.claude/skills/
 cp -r horizon-academic-writing/skills/horizon-journal-recommender ~/.claude/skills/
 ```
 
 Copy only the skill or skills you want. For a project-local installation, use the project's `.claude/skills/` directory instead.
 
-Invoke a skill explicitly with `/horizon-ember`, `/horizon-afterglow`, `/horizon-aurora`, or `/horizon-journal-recommender`, or let Claude select it from the request. The optional `agents/openai.yaml` files supply OpenAI UI metadata; Claude Code uses the shared `SKILL.md` and bundled resources and does not require that metadata.
+Invoke a skill explicitly with `/horizon-ember`, `/horizon-afterglow`, `/horizon-aurora`, `/horizon-aegis`, or `/horizon-journal-recommender`, or let Claude select it from the request. The optional `agents/openai.yaml` files supply OpenAI UI metadata; Claude Code uses the shared `SKILL.md` and bundled resources and does not require that metadata.
 
 ### Packaged-skill clients
 
@@ -138,6 +160,10 @@ Language-edit main.tex for journal submission. Keep the diff minimal.
 Translate this Chinese abstract into English and polish it.
 Fix the AI-sounding voice without changing any claims.
 Check whether this revision changed any numbers, citations, or equations.
+Audit this manuscript before submission: which central claims can the evidence defend?
+请审查这篇论文的创新性、方法与数值一致性，以及证据是否足以支持结论。
+Compare the supplied implementation with the paper and flag mismatches that affect its claims.
+Give me a fast scientific audit without rewriting the manuscript.
 Recommend and verify target journals for this manuscript.
 请根据这篇论文推荐投稿期刊，并核实收录、OA/APC 和近期相关论文。
 Check whether this journal is a realistic submission target for my paper.
@@ -196,6 +222,16 @@ Its priorities are ordered deliberately:
 
 A lower-priority improvement must never damage a higher-priority one.
 
+## How Aegis works
+
+```text
+Inventory manuscript and artifacts → Extract core claims → Verify prior work
+    → Check methods and numbers → Inspect implementation when supplied
+    → Map claims to evidence → Calibrate risks → Recommend minimum repairs
+```
+
+The audit distinguishes observed defects from unchecked material and tests only the evidence requirements implied by each claim. Its report prioritizes major scientific risks; it does not treat additional experiments as the only path to repair.
+
 ## Repository layout
 
 ```text
@@ -238,6 +274,15 @@ A lower-priority improvement must never damage a higher-priority one.
     │   └── scripts/
     │       ├── check_preservation.py
     │       └── test_check_preservation.py
+    ├── horizon-aegis/
+    │   ├── SKILL.md
+    │   ├── agents/
+    │   │   └── openai.yaml
+    │   └── references/
+    │       ├── calibration.md
+    │       ├── implementation-fidelity.md
+    │       ├── method-consistency.md
+    │       └── validation-audit.md
     └── horizon-journal-recommender/
         ├── SKILL.md
         ├── agents/
@@ -255,6 +300,7 @@ The repository uses skill-scoped semantic version tags:
 ```text
 horizon-ember-v1.0.0
 horizon-afterglow-v1.1.0
+horizon-aegis-v1.0.0
 horizon-journal-recommender-v1.0.0
 ```
 
