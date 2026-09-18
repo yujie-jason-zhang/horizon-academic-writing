@@ -61,9 +61,27 @@ Version 1.1.0, **Cinderella**, adds claim-forward framing: supported points shou
 
 ## Horizon-Aurora
 
-Horizon-Aurora extends manuscript polishing with cross-section claim alignment, section-specific guidance, focused consistency audits, and verification of the final delivery after all repairs. It supports reader-oriented polishing, strict/minimal-diff editing, Chinese-to-English translation, verification, consistency auditing, and diagnosis without rewriting.
+Horizon-Aurora is the manuscript-level polishing profile in the Horizon family. It polishes English academic manuscripts, translates Chinese academic text into English, and works directly with LaTeX/TeX projects.
 
-Aurora keeps independent source and candidate files or project copies. Its preservation checker protects preambles and supported table structures, requires project traversal when includes are present, and limits structural reordering to supported citation/reference events. Existing label and numbering style issues are advisory. Custom macros can be registered explicitly; unregistered arguments, translated word-based quantities, and scientific meaning still require manual review.
+It addresses two manuscript-level failure modes:
+
+1. **Isolated local edits** that improve individual passages while terminology, claim strength, or scope drifts across sections.
+2. **Incomplete final verification** that checks an intermediate revision but leaves later repairs or included files unverified.
+
+Aurora uses one integrated rewrite followed by fidelity verification, a global reader and claim-alignment pass, targeted repair, a focused consistency audit, and final verification. It preserves scientific meaning and does not assess novelty, redesign contributions, or repair a scientifically unstable argument.
+
+Version 1.0.0 includes section-specific guidance, independent source and candidate project handling, and explicit full/partial coverage reporting. Its checker supports preamble and table protection, registered custom macros, and translation-aware quantity checks with documented manual-review boundaries.
+
+### Modes
+
+| Mode | Use case |
+|---|---|
+| **Reader-oriented** | Manuscript polishing with paragraph progression and cross-section claim alignment |
+| **Strict token-preservation** | Minimal-diff editing with stronger mechanical preservation |
+| **Translation + polishing** | Chinese academic source to natural English without semantic strengthening |
+| **Verification** | Compare an original and revision without rewriting |
+| **Consistency audit** | Check terminology, notation, numerical relationships, and recurring claims |
+| **Diagnosis only** | Identify high-impact readability and fidelity problems without rewriting |
 
 ## Horizon-Aegis
 
@@ -221,6 +239,16 @@ Its priorities are ordered deliberately:
 5. Surface polish
 
 A lower-priority improvement must never damage a higher-priority one.
+
+## How Aurora works
+
+```text
+Understand globally → Lock meaning → Diagnose → One integrated rewrite
+    → Verify fidelity → Global reader and claim-alignment pass
+    → Targeted repair → Focused consistency audit → Final verification
+```
+
+Aurora carries manuscript context across sections and verifies the final delivery after all repairs. It reports full or partial coverage according to the material actually reviewed, edited, and verified.
 
 ## How Aegis works
 
