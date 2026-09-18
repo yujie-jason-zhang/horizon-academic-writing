@@ -85,13 +85,16 @@ Version 1.0.0 includes section-specific guidance, independent source and candida
 
 ## Horizon-Aegis
 
-Horizon-Aegis audits whether a technical paper's conclusions can withstand a skeptical reviewer before submission or major revision. It checks novelty against verified prior work, consistency across methods and reported numbers, claim-evidence alignment, baselines, ablations, and statistical rigor.
+Horizon-Aegis is the read-only scientific-audit profile in the Horizon family. It reviews technical papers before submission or major revision, checking novelty, methods, reported numbers, evidence, and supplied implementation artifacts.
 
-Its central distinction is **effectiveness versus attribution or necessity**: a method can work without establishing that the claimed contribution caused the improvement or was needed. Aegis evaluates each claim separately, identifies credible alternative explanations, and recommends the minimum decisive evidence, claim narrowing, or contribution reframing.
+It addresses two common failure modes:
 
-When implementation artifacts are available, it traces the manuscript specification through code, configurations, and the result-generating path. Missing code limits the audit; it is not itself a manuscript defect. Findings use severity levels S0-S4 and evidence levels E0-E5, with source locations and explicit limits on what was checked.
+1. **Inconsistent methods**: prose, equations, settings, results, or code describe different versions of the method.
+2. **Unproven attribution**: the full method works, but the evidence does not establish that the claimed contribution caused the gain or was needed.
 
-Aegis is read-only: it returns an assessment and repair recommendations. Language polishing belongs to Ember, Afterglow, or Aurora; target-journal selection belongs to Journal Recommender. Aegis does not draft rebuttal letters or run experiments.
+Aegis builds a claim-evidence matrix, tests credible alternative explanations, and recommends minimum decisive evidence, claim narrowing, or contribution reframing. It reports findings without editing the manuscript. Missing code limits the audit; it is not itself a manuscript defect.
+
+Version **1.0.0** is the first public release. See the [Aegis guide](skills/horizon-aegis/README.md) for installation, prompts, report details, and the full workflow.
 
 ### Modes
 
@@ -303,6 +306,7 @@ The audit distinguishes observed defects from unchecked material and tests only 
     │       ├── check_preservation.py
     │       └── test_check_preservation.py
     ├── horizon-aegis/
+    │   ├── README.md
     │   ├── SKILL.md
     │   ├── agents/
     │   │   └── openai.yaml
