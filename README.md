@@ -15,8 +15,8 @@ Horizon treats scholarly writing as technical communication rather than generic 
 |---|---|---|
 | **Horizon-Ember** | Available | Focused, paragraph-level academic polishing |
 | **Horizon-Afterglow** | Available | Balanced, reader-oriented manuscript polishing |
+| **Horizon-Aurora** | Available | Manuscript-level polishing, cross-section claim alignment, and final fidelity checks |
 | **Horizon-Journal-Recommender** | Available | Verified target-journal shortlisting and fit checks |
-| **Horizon-Aurora** | Testing | Exhaustive manuscript-level polishing and consistency review |
 
 Only released skills are included in `skills/`; testing and planned skills do not have placeholder directories.
 
@@ -58,6 +58,12 @@ Version 1.1.0, **Cinderella**, adds claim-forward framing: supported points shou
 | **Verification** | Compare an original and revision without rewriting |
 | **Consistency audit** | Check terminology, notation, numerical relationships, and references |
 
+## Horizon-Aurora
+
+Horizon-Aurora extends manuscript polishing with cross-section claim alignment, section-specific guidance, focused consistency audits, and verification of the final delivery after all repairs. It supports reader-oriented polishing, strict/minimal-diff editing, Chinese-to-English translation, verification, consistency auditing, and diagnosis without rewriting.
+
+Aurora keeps independent source and candidate files or project copies. Its preservation checker protects preambles and supported table structures, requires project traversal when includes are present, and limits structural reordering to supported citation/reference events. Existing label and numbering style issues are advisory. Custom macros can be registered explicitly; unregistered arguments, translated word-based quantities, and scientific meaning still require manual review.
+
 ## Horizon-Journal-Recommender
 
 Horizon-Journal-Recommender builds evidence-backed submission shortlists for finished or near-finished manuscripts. It profiles the paper, filters a broad candidate pool, live-verifies the finalists, and ranks them as Reach, Core, and Backup targets.
@@ -81,6 +87,7 @@ Ask the built-in installer to install a skill from its GitHub subdirectory:
 ```text
 $skill-installer https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/main/skills/horizon-ember
 $skill-installer https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/main/skills/horizon-afterglow
+$skill-installer https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/main/skills/horizon-aurora
 $skill-installer https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/main/skills/horizon-journal-recommender
 ```
 
@@ -89,6 +96,7 @@ After installation, Codex can select the appropriate skill automatically when a 
 ```text
 $horizon-ember
 $horizon-afterglow
+$horizon-aurora
 $horizon-journal-recommender
 ```
 
@@ -100,12 +108,13 @@ Clone the repository and copy the skill directory into your personal skills dire
 git clone https://github.com/yujie-jason-zhang/horizon-academic-writing.git
 cp -r horizon-academic-writing/skills/horizon-ember ~/.claude/skills/
 cp -r horizon-academic-writing/skills/horizon-afterglow ~/.claude/skills/
+cp -r horizon-academic-writing/skills/horizon-aurora ~/.claude/skills/
 cp -r horizon-academic-writing/skills/horizon-journal-recommender ~/.claude/skills/
 ```
 
 Copy only the skill or skills you want. For a project-local installation, use the project's `.claude/skills/` directory instead.
 
-Invoke a skill explicitly with `/horizon-ember`, `/horizon-afterglow`, or `/horizon-journal-recommender`, or let Claude select it from the request. The optional `agents/openai.yaml` files supply OpenAI UI metadata; Claude Code uses the shared `SKILL.md` and bundled resources and does not require that metadata.
+Invoke a skill explicitly with `/horizon-ember`, `/horizon-afterglow`, `/horizon-aurora`, or `/horizon-journal-recommender`, or let Claude select it from the request. The optional `agents/openai.yaml` files supply OpenAI UI metadata; Claude Code uses the shared `SKILL.md` and bundled resources and does not require that metadata.
 
 ### Packaged-skill clients
 
@@ -151,12 +160,14 @@ python3 skills/horizon-afterglow/scripts/check_preservation.py \
 python3 skills/horizon-afterglow/scripts/check_preservation.py \
   original.tex polished.tex
 
-# Multi-file LaTeX project
-python3 skills/horizon-afterglow/scripts/check_preservation.py \
-  main.tex polished_main.tex --project --reader-oriented
+# Aurora: multi-file LaTeX project with independent source/candidate copies
+python3 skills/horizon-aurora/scripts/check_preservation.py \
+  original/main.tex candidate/main.tex --project --reader-oriented
 ```
 
-The checker covers protected TeX structures, citation and reference keys, mathematics, numerical bindings, placeholder keys, hard-coded numbering, and reference-name style. Run it with `--help` for all modes and flags.
+The checkers compare protected TeX structures, citation and reference keys, mathematics, and recognized numerical tokens. Semantic numerical bindings still require manual review. Aurora reports placeholder keys, hard-coded numbering, and reference-name style as advisories; it also provides `--protect-command NAME=N` and `--translation` with explicit manual-review boundaries. Run a checker's `--help` for its modes and flags.
+
+Run Aurora's bundled regression tests with `python3 skills/horizon-aurora/scripts/test_check_preservation.py`.
 
 ## How Ember works
 
@@ -214,6 +225,19 @@ A lower-priority improvement must never damage a higher-priority one.
     │   │   └── writing_rules.md
     │   └── scripts/
     │       └── check_preservation.py
+    ├── horizon-aurora/
+    │   ├── SKILL.md
+    │   ├── agents/
+    │   │   └── openai.yaml
+    │   ├── references/
+    │   │   ├── context_and_workflow.md
+    │   │   ├── fidelity_and_tex.md
+    │   │   ├── quality_control.md
+    │   │   ├── section_guidance.md
+    │   │   └── writing_rules.md
+    │   └── scripts/
+    │       ├── check_preservation.py
+    │       └── test_check_preservation.py
     └── horizon-journal-recommender/
         ├── SKILL.md
         ├── agents/

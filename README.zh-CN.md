@@ -15,8 +15,8 @@ Horizon 将学术写作视为技术沟通，而不是一般性的文本生成。
 |---|---|---|
 | **Horizon-Ember** | 可用 | 聚焦单个段落的学术润色 |
 | **Horizon-Afterglow** | 可用 | 均衡、读者导向的论文润色 |
+| **Horizon-Aurora** | 可用 | 全文润色、跨章节主张对齐与最终保真核查 |
 | **Horizon-Journal-Recommender** | 可用 | 经核验的目标期刊推荐与匹配度检查 |
-| **Horizon-Aurora** | 测试中 | 穷尽式全文润色与一致性审查 |
 
 `skills/` 目录只收录已经发布的 Skills；测试中和计划中的 Skills 不设置占位目录。
 
@@ -58,6 +58,12 @@ Afterglow 先进行一次整合式改写，再执行保真核查、全局读者�
 | **核查** | 比较原文与修订稿，不进行改写 |
 | **一致性审查** | 检查术语、符号、数值关系和引用 |
 
+## Horizon-Aurora
+
+Horizon-Aurora 在论文润色流程中加入跨章节主张对齐、分章节指导、重点一致性审查，以及全部修复完成后的最终交付核查。它支持读者导向润色、严格／最小改动编辑、中译英、保真核查、一致性审查和不改写原文的诊断模式。
+
+Aurora 保留独立的原稿与候选文件或项目副本。其保真检查器保护导言区和受支持的表格结构，在存在包含文件时要求项目遍历，并将结构重排的放宽范围限制为受支持的引文和交叉引用事件。原稿已有的标签、编号风格问题仅作提示。自定义宏可以显式登记；未登记的参数、跨语言数词和科学含义仍需人工核对。
+
 ## Horizon-Journal-Recommender
 
 Horizon-Journal-Recommender 为已完成或接近完成的论文生成有证据支持的投稿期刊清单。它首先分析稿件，对大范围候选期刊进行初筛，再实时核验入围期刊，最终将其划分为 Reach、Core 和 Backup。
@@ -81,6 +87,7 @@ Horizon-Journal-Recommender 为已完成或接近完成的论文生成有证据�
 ```text
 $skill-installer https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/main/skills/horizon-ember
 $skill-installer https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/main/skills/horizon-afterglow
+$skill-installer https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/main/skills/horizon-aurora
 $skill-installer https://github.com/yujie-jason-zhang/horizon-academic-writing/tree/main/skills/horizon-journal-recommender
 ```
 
@@ -89,6 +96,7 @@ $skill-installer https://github.com/yujie-jason-zhang/horizon-academic-writing/t
 ```text
 $horizon-ember
 $horizon-afterglow
+$horizon-aurora
 $horizon-journal-recommender
 ```
 
@@ -100,12 +108,13 @@ $horizon-journal-recommender
 git clone https://github.com/yujie-jason-zhang/horizon-academic-writing.git
 cp -r horizon-academic-writing/skills/horizon-ember ~/.claude/skills/
 cp -r horizon-academic-writing/skills/horizon-afterglow ~/.claude/skills/
+cp -r horizon-academic-writing/skills/horizon-aurora ~/.claude/skills/
 cp -r horizon-academic-writing/skills/horizon-journal-recommender ~/.claude/skills/
 ```
 
 只需复制自己需要的 Skill。若要在单个项目中安装，请改用项目内的 `.claude/skills/` 目录。
 
-可以通过 `/horizon-ember`、`/horizon-afterglow` 或 `/horizon-journal-recommender` 显式调用 Skill，也可以让 Claude 根据请求自动选择。可选的 `agents/openai.yaml` 文件用于 OpenAI 界面元数据；Claude Code 使用共用的 `SKILL.md` 和随附资源，不依赖该元数据。
+可以通过 `/horizon-ember`、`/horizon-afterglow`、`/horizon-aurora` 或 `/horizon-journal-recommender` 显式调用 Skill，也可以让 Claude 根据请求自动选择。可选的 `agents/openai.yaml` 文件用于 OpenAI 界面元数据；Claude Code 使用共用的 `SKILL.md` 和随附资源，不依赖该元数据。
 
 ### 支持 Skill 文件夹或 ZIP 的客户端
 
@@ -151,12 +160,14 @@ python3 skills/horizon-afterglow/scripts/check_preservation.py \
 python3 skills/horizon-afterglow/scripts/check_preservation.py \
   original.tex polished.tex
 
-# 多文件 LaTeX 项目
-python3 skills/horizon-afterglow/scripts/check_preservation.py \
-  main.tex polished_main.tex --project --reader-oriented
+# Aurora：使用独立原稿与候选副本的多文件 LaTeX 项目
+python3 skills/horizon-aurora/scripts/check_preservation.py \
+  original/main.tex candidate/main.tex --project --reader-oriented
 ```
 
-检查器覆盖受保护的 TeX 结构、引文键和交叉引用键、数学内容、数值绑定、占位符键、硬编码编号以及引用名称风格。运行 `--help` 可以查看全部模式和参数。
+检查器比较受保护的 TeX 结构、引文键和交叉引用键、数学内容及可识别的数值 token；数值与科学含义的绑定仍需人工核对。Aurora 将占位符键、硬编码编号和引用名称风格作为提示处理，并提供 `--protect-command NAME=N` 与 `--translation`，明确需要人工复核的范围。运行相应检查器的 `--help` 可以查看模式和参数。
+
+运行 `python3 skills/horizon-aurora/scripts/test_check_preservation.py` 可以执行 Aurora 随附的回归测试。
 
 ## Ember 的工作流程
 
@@ -214,6 +225,19 @@ Ember 始终以段落为编辑单位：句子修改服务于整个段落，相�
     │   │   └── writing_rules.md
     │   └── scripts/
     │       └── check_preservation.py
+    ├── horizon-aurora/
+    │   ├── SKILL.md
+    │   ├── agents/
+    │   │   └── openai.yaml
+    │   ├── references/
+    │   │   ├── context_and_workflow.md
+    │   │   ├── fidelity_and_tex.md
+    │   │   ├── quality_control.md
+    │   │   ├── section_guidance.md
+    │   │   └── writing_rules.md
+    │   └── scripts/
+    │       ├── check_preservation.py
+    │       └── test_check_preservation.py
     └── horizon-journal-recommender/
         ├── SKILL.md
         ├── agents/

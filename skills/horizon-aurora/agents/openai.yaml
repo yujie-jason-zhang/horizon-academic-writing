@@ -1,0 +1,4 @@
+interface:
+  display_name: "Horizon Aurora"
+  short_description: "Academic manuscript polishing with fidelity checks"
+  default_prompt: "Use $horizon-aurora to polish this manuscript globally while preserving all claims, numbers, citations, math, and LaTeX."
